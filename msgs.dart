@@ -1,8 +1,12 @@
 
 
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'chat.dart';
+import 'profile.dart';
+
+
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
@@ -86,14 +90,38 @@ class _MessagesScreenState extends State<MessagesScreen> {
             Column(
               children: [
                 const SizedBox(height: 32),
-                Center(
-                  child: Text(
-                    "Messages",
-                    style: GoogleFonts.magra(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 32,
-                      color: Colors.black,
-                    ),
+                // Header with title and profile image at right
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "Messages",
+                            style: GoogleFonts.magra(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 32,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const MyProfileScreen()),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: const NetworkImage(
+                            "https://as2.ftcdn.net/v2/jpg/03/31/69/91/1000_F_331699188_lRpvqxO5QRtwOM05gR50ImaaJgBx68vi.jpg",
+                          ),
+                          radius: 20,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -169,7 +197,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                               children: [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(msg["avatar"] as String),
-                                  radius: 20, // Reduced size
+                                  radius: 20,
                                 ),
                                 const SizedBox(width: 14),
                                 Expanded(
@@ -246,8 +274,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 8),
-                const SizedBox(height: 80),
+                const SizedBox(height: 88),
               ],
             ),
             // Floating action buttons
@@ -597,7 +624,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                 children: [
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(c["avatar"] as String),
-                                    radius: 18, // Reduced size
+                                    radius: 18,
                                   ),
                                   const SizedBox(width: 14),
                                   Expanded(
@@ -655,7 +682,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                 child: Text(
                                   "Create",
                                   style: GoogleFonts.magra(
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w300,
                                     fontSize: 16,
                                   ),
                                 ),
@@ -723,6 +750,3 @@ class _BottomActionButton extends StatelessWidget {
     );
   }
 }
-
-
-
